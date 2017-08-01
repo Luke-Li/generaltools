@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{MM-dd HH:mm:ss} [%p] [%t] [%c %F:%L]-%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="FATAL" />
+			<param name="LevelMin" value="WARN" />
+		</filter>
+	</appender>
+	<!-- 使用时间控制日志文件的更迭 <appender name="DEBUG" class="org.apache.log4j.DailyRollingFileAppender"> 
+		生成的日志文件名 <param name="File" value="debug.log"/> <param name="Append" value="true"/> 
+		定义日志文件名时间格式 <param name="datePattern" value="'.'yyyy-MM-dd" /> <layout class="org.apache.log4j.PatternLayout"> 
+		定义日志输出的格式 <param name="ConversionPattern" value="%5p [%t] (%F:%L) - %m%n"/> 
+		</layout> *通过过滤器，我们可以定义这个文件将接收何种等级的日志信息，这里是debug级别 <filter class="org.apache.log4j.varia.LevelRangeFilter"> 
+		<param name="LevelMax" value="DEBUG" /> <param name="LevelMin" value="DEBUG" 
+		/> </filter> </appender> <appender name="INFO" class="org.apache.log4j.DailyRollingFileAppender"> 
+		<param name="File" value="info.log"/> <param name="Append" value="true"/> 
+		<param name="datePattern" value="'.'yyyy-MM-dd" /> <layout class="org.apache.log4j.PatternLayout"> 
+		<param name="ConversionPattern" value="%p %t %c - %m%n"/> </layout> <filter 
+		class="org.apache.log4j.varia.LevelRangeFilter"> <param name="LevelMax" value="INFO" 
+		/> <param name="LevelMin" value="INFO" /> </filter> </appender> -->
+	<!-- 通过日志大小来确定是否生成新的日志文件 -->
+	<appender name="DEBUG" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="logs/debug.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="4096KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{MM-dd HH:mm:ss} [%p] [%t] [%c %F:%L]-%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMax" value="DEBUG" />
+			<param name="LevelMin" value="DEBUG" />
+		</filter>
+	</appender>
+	<appender name="INFO" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="logs/info.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="4096KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{MM-dd HH:mm:ss} [%p] [%t] [%c %F:%L]-%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<!-- 如果想error级日志也输入到此，修改 <param name="LevelMax" value="ERROR" -->
+			<param name="LevelMax" value="INFO" />
+			<param name="LevelMin" value="INFO" />
+		</filter>
+	</appender>
+
+	<appender name="WARN" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="logs/warn.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="4096KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{MM-dd HH:mm:ss} [%p] [%t] [%c %F:%L]-%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<!-- 如果想error级日志也输入到此，修改 <param name="LevelMax" value="ERROR" -->
+			<param name="LevelMax" value="WARN" />
+			<param name="LevelMin" value="WARN" />
+		</filter>
+	</appender>
+	<appender name="ERROR" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="logs/error.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="4096KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{MM-dd HH:mm:ss} [%p] [%t] [%c %F:%L]-%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<!-- 如果想error级日志也输入到此，修改 <param name="LevelMax" value="ERROR" -->
+			<param name="LevelMax" value="ERROR" />
+			<param name="LevelMin" value="ERROR" />
+		</filter>
+	</appender>
+	
+	<appender name="FATAL" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="logs/fatal.log"/>
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="4096KB" />
+		<param name="MaxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{MM-dd HH:mm:ss} [%p] [%t] [%c %F:%L]-%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<!-- 如果想error级日志也输入到此，修改 <param name="LevelMax" value="ERROR" -->
+			<param name="LevelMax" value="FATAL" />
+			<param name="LevelMin" value="FATAL" />
+		</filter>
+	</appender>
+	
+    <logger name="org.apache.commons.httpclient" additivity="true">     
+        <level value="ERROR" />     
+        <appender-ref ref="STDOUT" />
+    </logger>  
+           
+	<root>
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="DEBUG" />
+		<appender-ref ref="INFO" />
+		<appender-ref ref="WARN" />
+		<appender-ref ref="ERROR" />
+		<appender-ref ref="FATAL" />
+	</root>
+</log4j:configuration>
